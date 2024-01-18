@@ -1,4 +1,5 @@
 -- Create stored procedure ComputeAverageWeightedScoreForUser
+DELIMITER //
 CREATE PROCEDURE ComputeAverageWeightedScoreForUser(IN user_id INT)
 BEGIN
     UPDATE users
@@ -10,3 +11,5 @@ BEGIN
     )
     WHERE id = user_id;
 END;
+//
+DELIMITER ;
