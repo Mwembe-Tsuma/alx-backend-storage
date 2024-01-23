@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Connect to MongoDB and list databases
+mongo --quiet --eval "db.adminCommand({listDatabases: 1}).databases.forEach(function(database) { print(database.name) });"
