@@ -1,2 +1,2 @@
 // Connect to MongoDB and show databases
-mongo --quiet --eval "show dbs;"
+show dbs
