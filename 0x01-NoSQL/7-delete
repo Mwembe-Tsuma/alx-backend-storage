@@ -1,0 +1,2 @@
+// delete documents with name="Holberton school" in the school collection
+db.school.delete({ name: "Holberton school" })
