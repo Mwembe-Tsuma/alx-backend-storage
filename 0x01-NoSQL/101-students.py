@@ -5,6 +5,7 @@ sorted by average score
 
 from pymongo import MongoClient
 
+
 def top_students(mongo_collection):
     """Return all students sorted by average score."""
     students = mongo_collection.aggregate([
