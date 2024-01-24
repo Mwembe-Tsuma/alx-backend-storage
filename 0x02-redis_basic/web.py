@@ -13,16 +13,12 @@ def track_get_page(fn: Callable) -> Callable:
     @wraps(fn)
     def wrapper(url: str) -> str:
         redis_client = redis.Redis()
-        count_key = f'count:{url}'
-        cache_key = f'cache:{url}'
-
-        redis_client.incr(count_key)
-        cached_page = redis_client.get(cache_key)
+        redis_client.incr(f'count:{url}')
+        cached_page = redis_client.get(f'{url}')
         if cached_page:
             return cached_page.decode('utf-8')
-
         response = fn(url)
-        redis_client.setex(cache_key, 10, response)
+        redis_client.set(f'{url}', response, 10)
         return response
     return wrapper
 
