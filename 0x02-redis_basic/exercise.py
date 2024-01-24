@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ Writing strings to Redis"""
 
+
 import redis
 import uuid
 from typing import Any, Callable, Optional, Union
@@ -62,7 +63,7 @@ class Cache:
 
         return key
 
-    def get(self, key: str, fn: Callable = None) -> Union[str, bytes, int, float, None]:
+    def get(self, key: str, fn: Optional[Callable] = None) -> Any:
         data = self._redis.get(key)
 
         if data is None:
