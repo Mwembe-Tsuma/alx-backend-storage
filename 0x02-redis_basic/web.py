@@ -8,13 +8,11 @@ from functools import wraps
 from typing import Callable
 
 
-redis_client = redis.Redis()
-
-
 def track_get_page(fn: Callable) -> Callable:
     """ Implementing an expiring web cache and tracker """
     @wraps(fn)
     def wrapper(url: str) -> str:
+        redis_client = redis.Redis()
         count_key = f'count:{url}'
         cache_key = f'cache:{url}'
 
