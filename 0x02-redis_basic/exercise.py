@@ -62,7 +62,7 @@ class Cache:
 
         return key
 
-    def get(self, key: str, fn: Callable = None) -> Union[str, bytes, int, float, None]:
+    def get(self, key: str, fn: Optional[Callable] = None) -> Any:
         data = self._redis.get(key)
 
         if data is None:
