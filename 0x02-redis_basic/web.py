@@ -1,15 +1,19 @@
-#!/usr/bin/env python3
-""" Main file """
+ #!/usr/bin/env python3
+"""Main file"""
 
 
 import requests
 import redis
 from functools import wraps
+from typing import Callable
+
+redis_client = redis.Redis()
 
 
-def count_and_cache(func):
+def count_and_cache(func: Callable) -> Callable:
+    """Implementing an expiring web cache and tracker"""
     @wraps(func)
-    def wrapper(url):
+    def wrapper(url: str) -> str:
         count_key = f"count:{url}"
         cache_key = f"cache:{url}"
 
@@ -24,7 +28,6 @@ def count_and_cache(func):
 
         return result
     return wrapper
-
 
 @count_and_cache
 def get_page(url: str) -> str:
